@@ -1,0 +1,18 @@
+<kendo-grid [data]="gridView" [height]="400">
+    <kendo-grid-column field="name" title="Название комнаты" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="buildingName" title="Здание/Корпус" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="type" title="Тип помещения" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="capacity" title="Вмещаемость" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="floor" title="Этаж" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="number" title="Номер" [width]="200"></kendo-grid-column>
+    <kendo-grid-command-column title="Действия" [width]="200">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <button kendoButton (click)="updateAuditorium(dataItem)">Edit</button>
+            <button kendoButton (click)="deleteAuditorium(dataItem.id)">Delete</button>
+        </ng-template>
+    </kendo-grid-command-column>
+</kendo-grid>
+
+<button kendoButton (click)="openModal()">Добавить новую комнату</button>
+
+<app-rooms-modal *ngIf="showModal" (close)="closeModal()" (submitForm)="onBuildingSubmit($event)"></app-rooms-modal>

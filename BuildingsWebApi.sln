@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingsWebApi", "BuildingsWebApi\BuildingsWebApi.csproj", "{2CD72EA7-0D9F-4EFD-A328-E0C4F826A3AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomsWebApi", "RoomsWebApi\RoomsWebApi.csproj", "{1FC69AB3-314E-4E91-AC28-2D0142A07254}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CD72EA7-0D9F-4EFD-A328-E0C4F826A3AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD72EA7-0D9F-4EFD-A328-E0C4F826A3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD72EA7-0D9F-4EFD-A328-E0C4F826A3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD72EA7-0D9F-4EFD-A328-E0C4F826A3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC69AB3-314E-4E91-AC28-2D0142A07254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC69AB3-314E-4E91-AC28-2D0142A07254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC69AB3-314E-4E91-AC28-2D0142A07254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC69AB3-314E-4E91-AC28-2D0142A07254}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A30B09C4-855F-4715-A7A2-F33A2732B858}
+	EndGlobalSection
+EndGlobal

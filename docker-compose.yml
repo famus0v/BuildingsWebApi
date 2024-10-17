@@ -1,0 +1,113 @@
+version: '3.9'
+services:
+  # Buildings API
+  buildingsapi:
+    image: buildingsapi-image
+    build:
+      context: ./BuildingsWebApi
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=buildingsapi-db;Database=buildingsDb;Username=postgres;Password=admin
+    depends_on:
+      - buildingsapi-db
+      - rabbitmq
+    networks:
+      - backend
+
+  # BD Buildings API
+  buildingsapi-db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: buildingsDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - buildingsapi-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  # Rooms API
+  roomsapi:
+    image: roomsapi-image
+    build:
+      context: ./RoomsWebApi
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=roomsapi-db;Database=roomsDb;Username=postgres;Password=admin
+    depends_on:
+      - roomsapi-db
+      - rabbitmq
+    networks:
+      - backend
+
+  # BD Rooms API
+  roomsapi-db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: roomsDb
+    ports:
+      - "5434:5432"
+    volumes:
+      - roomsapi-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ IO
+      - "15672:15672" # RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: user  
+      RABBITMQ_DEFAULT_PASS: password  
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmqctl status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+      
+  # Angular
+  angular-app:
+    build:
+      context: ./AngularFrontend/angular-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - backend
+    depends_on:
+      - roomsapi
+      - buildingsapi
+ 
+
+volumes:
+  buildingsapi-db-data:
+  roomsapi-db-data:
+
+networks:
+  backend:
+    driver: bridge

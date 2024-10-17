@@ -1,0 +1,61 @@
+<kendo-dialog title="Создать новое строение" (close)="closeDialog()">
+    <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Выберите здание</label>
+            <kendo-dropdownlist [data]="buildingSummary" textField="name" [valuePrimitive]="true" valueField="id"
+                formControlName="buildingId">
+            </kendo-dropdownlist>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Название</label>
+            <kendo-textbox formControlName="name" label="Название"></kendo-textbox>
+            <div
+                *ngIf="roomForm.get('name')?.invalid && (roomForm.get('name')?.touched || roomForm.get('name')?.dirty)">
+                <small class="text-danger">Название обязательно.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Выберите здание</label>
+            <kendo-dropdownlist [data]="roomTypes" textField="name" [valuePrimitive]="true" valueField="id"
+                formControlName="type" label="'Тип комнаты'"></kendo-dropdownlist>
+        </div>
+
+        <div class="form-group">
+            <label for="capacity">Вместимость</label>
+            <kendo-numerictextbox formControlName="capacity" label="Вместимость"></kendo-numerictextbox>
+
+            <div
+                *ngIf="roomForm.get('capacity')?.invalid && (roomForm.get('capacity')?.touched || roomForm.get('capacity')?.dirty)">
+                <small class="text-danger">Вместимость должна быть больше 0.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="floors">Этаэ</label>
+            <kendo-numerictextbox formControlName="floor" label="Этаж"></kendo-numerictextbox>
+
+            <div
+                *ngIf="roomForm.get('floor')?.invalid && (roomForm.get('floor')?.touched || roomForm.get('floor')?.dirty)">
+                <small class="text-danger">Вместимость должна быть больше 0.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="floors">Номер комнаты</label>
+            <kendo-numerictextbox formControlName="number" label="Номер комнаты"></kendo-numerictextbox>
+
+            <div
+                *ngIf="roomForm.get('number')?.invalid && (roomForm.get('number')?.touched || roomForm.get('number')?.dirty)">
+                <small class="text-danger">Вместимость должна быть больше 0.</small>
+            </div>
+        </div>
+
+
+        <kendo-dialog-actions>
+            <button kendoButton type="submit" [disabled]="roomForm.invalid">Создать</button>
+            <button kendoButton (click)="roomForm.reset()">Отмена</button>
+        </kendo-dialog-actions>
+    </form>
+</kendo-dialog>

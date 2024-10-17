@@ -1,0 +1,16 @@
+<kendo-grid [data]="gridView" [height]="400">
+    <kendo-grid-column field="name" title="Здание/Корпус" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="address" title="Адрес" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="floors" title="Этажей" [width]="200"></kendo-grid-column>
+    <kendo-grid-command-column title="Действия" [width]="200">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <button kendoButton (click)="updateBuilding(dataItem)">Edit</button>
+            <button kendoButton (click)="deleteBuilding(dataItem.id)">Delete</button>
+        </ng-template>
+    </kendo-grid-command-column>
+</kendo-grid>
+
+<button kendoButton (click)="openModal()">Добавить новое здание/корпус</button>
+
+<app-building-modal *ngIf="showModal" (close)="closeModal()"
+    (submitForm)="onBuildingSubmit($event)"></app-building-modal>
